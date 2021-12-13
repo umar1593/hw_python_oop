@@ -1,6 +1,3 @@
-from typing import Tuple
-
-
 class InfoMessage:
     """Информационное сообщение о тренировке."""
 
