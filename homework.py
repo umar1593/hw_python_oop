@@ -1,11 +1,11 @@
-from typing import Sequence
+from typing import Tuple
 
 
 class InfoMessage:
     """Информационное сообщение о тренировке."""
 
     def __init__(self,
-                 training_type: Sequence[str],
+                 training_type: str,
                  duration: float,
                  distance: float,
                  speed: float,
@@ -67,10 +67,10 @@ class Running(Training):
         super().__init__(action, duration, weight)
 
     def get_spent_calories(self) -> float:
-        coeff_calorie_1 = 18
-        coeff_calorie_2 = 20
-        return(((coeff_calorie_1 * self.get_mean_speed()
-                 - coeff_calorie_2) * self.weight)
+        COEFF_CALORIE_1 = 18
+        COEFF_CALORIE_2 = 20
+        return(((COEFF_CALORIE_1 * self.get_mean_speed()
+                 - COEFF_CALORIE_2) * self.weight)
                / self.M_IN_KM * self.duration * 60)
 
 
@@ -82,12 +82,12 @@ class SportsWalking(Training):
         self.height = height
 
     def get_spent_calories(self) -> float:
-        coeff_1 = 0.035
-        coeff_2 = 0.029
-        square = 2
-        return((coeff_1 * self.weight + (self.get_mean_speed()**square
+        COEFF_1 = 0.035
+        COEFF_2 = 0.029
+        SQUARE = 2
+        return((COEFF_1 * self.weight + (self.get_mean_speed()**SQUARE
                 // self.height)
-                * coeff_2 * self.weight) * self.duration * 60)
+                * COEFF_2 * self.weight) * self.duration * 60)
 
 
 class Swimming(Training):
