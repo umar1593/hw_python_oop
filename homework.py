@@ -62,7 +62,7 @@ class Running(Training):
     """Тренировка: бег."""
     COEFF_CALORIE_1: int = 18
     COEFF_CALORIE_2: int = 20
-    
+
     def __init__(self, action: int, duration: float, weight: float) -> None:
         super().__init__(action, duration, weight)
 
@@ -84,9 +84,9 @@ class SportsWalking(Training):
         self.height = height
 
     def get_spent_calories(self) -> float:
-        return((self.COEFF_1 * self.weight + (self.get_mean_speed()**self.SQUARE
-                // self.height)
-                * self.COEFF_2 * self.weight) * self.duration * 60)
+        return((self.COEFF_1 * self.weight + (self.get_mean_speed()
+               ** self.SQUARE // self.height)
+               * self.COEFF_2 * self.weight) * self.duration * 60)
 
 
 class Swimming(Training):
@@ -117,10 +117,12 @@ def read_package(workout_type: str, data: list) -> Training:
     training = workout_list[workout_type](*data)
     return training
 
+
 def main(training: Training) -> str:
     """Главная функция."""
     info = training.show_training_info()
     print(info.get_message())
+
 
 if __name__ == '__main__':
     packages = [
