@@ -8,9 +8,9 @@ class InfoMessage:
                  speed: float,
                  calories: float) -> None:
         self.training_type = training_type
-        self.duration = duration,
-        self.distance = distance,
-        self.speed = speed,
+        self.duration = duration
+        self.distance = distance
+        self.speed = speed
         self.calories = calories
 
     def get_message(self) -> str:
@@ -111,11 +111,12 @@ def read_package(workout_type: str, data: list) -> Training:
     workout_list = {'SWM': Swimming,
                     'RUN': Running,
                     'WLK': SportsWalking}
+
     training = workout_list[workout_type](*data)
     return training
 
 
-def main(training: Training) -> None:
+def main(training: Training) -> str:
     """Главная функция."""
     info = Training.show_training_info(training)
     print(InfoMessage.get_message(info))
@@ -131,3 +132,4 @@ if __name__ == '__main__':
     for workout_type, data in packages:
         training = read_package(workout_type, data)
         main(training)
+vjhvkjhvkhjv,v,m,v
