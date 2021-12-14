@@ -110,19 +110,17 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
+    # Если workout_type не поддерживается, то пора бросаться исключениями :о
     workout_list = {'SWM': Swimming,
                     'RUN': Running,
                     'WLK': SportsWalking}
-
     training = workout_list[workout_type](*data)
     return training
 
-
 def main(training: Training) -> str:
     """Главная функция."""
-    info = Training.show_training_info(training)
-    print(InfoMessage.get_message(info))
-
+    info = training.show_training_info()
+    print(info.get_message())
 
 if __name__ == '__main__':
     packages = [
