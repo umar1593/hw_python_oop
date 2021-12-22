@@ -1,4 +1,4 @@
-from typing import Type, Dict
+from typing import List, Union
 
 
 class InfoMessage:
@@ -98,8 +98,8 @@ class SportsWalking(Training):
 class Swimming(Training):
     """Тренировка: плавание."""
 
-    LEN_STEP = 1.38
-    CONST = 1.1
+    LEN_STEP: float = 1.38
+    CONST: float = 1.1
 
     def __init__(self, action: int, duration: float, weight: float,
                  length_pool:
@@ -116,7 +116,7 @@ class Swimming(Training):
         return ((self.get_mean_speed() + self.CONST) * 2 * self.weight)
 
 
-def read_package(workout_type: str, data: list) -> Training:
+def read_package(workout_type: str, data: List[Union[int, float]]) -> Training:
     """Прочитать данные полученные от датчиков."""
 
     training_type = {'SWM': Swimming,
