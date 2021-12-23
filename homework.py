@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import Dict, List, Type, Union
 
 
 class InfoMessage:
@@ -42,22 +42,18 @@ class Training:
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
-
         return (self.action * self.LEN_STEP / self.M_IN_KM)
 
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость движения."""
-
         return (self.get_distance() / self.duration)
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-
-        raise NotImplementedError('Подклассы должны реализовать это.')
+        raise NotImplementedError('Ошибка')
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
-
         return InfoMessage(self.__class__.__name__,
                            self.duration,
                            self.get_distance(),
@@ -118,10 +114,9 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: List[Union[int, float]]) -> Training:
     """Прочитать данные полученные от датчиков."""
-
-    training_type = {'SWM': Swimming,
-                     'RUN': Running,
-                     'WLK': SportsWalking}
+    training_type: Dict[str, Type[Training]] = {'SWM': Swimming,
+                                                'RUN': Running,
+                                                'WLK': SportsWalking}
     if workout_type in training_type:
         return training_type[workout_type](*data)
     raise ValueError('Ошибка!')
@@ -129,7 +124,6 @@ def read_package(workout_type: str, data: List[Union[int, float]]) -> Training:
 
 def main(training: Training) -> str:
     """Главная функция."""
-
     info = training.show_training_info()
     print(info.get_message())
 
